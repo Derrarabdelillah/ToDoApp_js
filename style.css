@@ -1,10 +1,10 @@
 body {
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     background: linear-gradient(to right, #360033, #0b8793);
 }
 
 * {
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     transition: 0.3s all;
 }
 
@@ -37,7 +37,7 @@ input {
 
 
 .input:focus {
-    outline: none;  
+    outline: none;
     scale: 1.02;
 }
 
@@ -54,7 +54,7 @@ input {
     color: white;
     font-weight: bold;
     border-radius: 50px;
-    background-image: linear-gradient(to right, #e52d27 0%, #b31217  51%, #e52d27  100%);
+    background-image: linear-gradient(to right, #e52d27 0%, #b31217 51%, #e52d27 100%);
 }
 
 .add:hover {
@@ -68,8 +68,7 @@ input {
 }
 
 .list {
-    width: 100%;
-    margin: 10px auto;
+    margin: 10px 0;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -92,20 +91,14 @@ button {
     color: white;
     cursor: pointer;
     border-radius: 50%;
-    background-image: linear-gradient(to right, #e52d27 0%, #b31217  51%, #e52d27  100%);
-}
-
-.list .delete {
-    /*  */
+    background-image: linear-gradient(to right, #e52d27 0%, #b31217 51%, #e52d27 100%);
 }
 
 button:hover {
     scale: 1.1;
 }
 
-.done {
-    opacity: 0.7;
-}
+
 
 
 .doneBtn {
@@ -117,7 +110,7 @@ i {
 }
 
 
-@media (max-width: 370px) {
+@media (max-width: 400px) {
     .form {
         display: block;
         place-items: center;
