@@ -12,19 +12,19 @@ let tasksDiv = document.querySelector(".tasks");
 // --- Add the task element to the tasksDiv
 
 
-let arrayOfTasks = [];
+let dataTsk = [];
 
 // check if there is data in local Storage to Show it
-if( localStorage.getItem("tasks") ) {
-    arrayOfTasks = JSON.parse(localStorage.getItem("tasks"));
+if (localStorage.getItem("tasks")) {
+    dataTsk = JSON.parse(localStorage.getItem("tasks"));
 }
 
 // Trigger Get Data from local Storage Function
 getData();
 
-addTsk.onclick = function() {
+addTsk.onclick = function () {
 
-    if( userTxt.value !== "" ) {
+    if (userTxt.value !== "") {
         addTasksToArray(userTxt.value); // save the task to the array
         userTxt.value = ""; // clear the input field
     };
@@ -35,12 +35,22 @@ addTsk.onclick = function() {
 // Click on Task Element
 tasksDiv.addEventListener("click", (e) => {
     // Delete Button
-    if( e.target.classList.contains("delete") ) {
+    if (e.target.classList.contains("delete")) {
         delItm(e.target.parentElement.getAttribute("data-id"));
+        // remove task from page
         e.target.parentElement.remove();
+    }
+
+    if (e.target.classList.contains("list")) {
+        // Toggle Completed for the task
+        changcomp(e.target.getAttribute("data-id"));
+        // toggle done class in the element clicked
+        e.target.classList.toggle("done");
     }
 })
 
+// this function add the user task to object and push the object to 
+// the array
 function addTasksToArray(taskTxt) {
 
     // Task Data
@@ -51,28 +61,28 @@ function addTasksToArray(taskTxt) {
     };
 
     // push the task data to the array
-    arrayOfTasks.push(task);
-    addElementsToPageFrom(arrayOfTasks);
+    dataTsk.push(task);
+    addElementsToPageFrom(dataTsk);
 
     // Add Data Array to Local Storage
-    savetoLocal(arrayOfTasks);
+    savetoLocal(dataTsk);
 
 };
 
 // create a function to add elements to page from array of tasks
-function addElementsToPageFrom(arrayOfTasks) {
+function addElementsToPageFrom(dataTsk) {
 
     // Empty the Div inner HTML
     tasksDiv.innerHTML = "";
 
     // Loop Through the array of tasks
-    arrayOfTasks.forEach( (task) => {
+    dataTsk.forEach((task) => {
 
         // Create New Div Element
         let div = document.createElement("div");
         div.className = "list";
 
-        if( task.completed ){
+        if (task.completed) {
             div.className = "list done";
         }
 
@@ -89,28 +99,47 @@ function addElementsToPageFrom(arrayOfTasks) {
         // Create Delete Button
         let span = document.createElement("button");
         span.className = "delete";
-        span.appendChild(document.createTextNode("Delete"));
+        // Delete Icon
+        let delIcon = document.createElement("i");
+        delIcon.classList = "fa-solid fa-x del";
+        span.appendChild(delIcon);
 
         // Add the delete button to the parent div
         div.appendChild(span);
+
         // Add the div element to the divTask
         tasksDiv.appendChild(div);
-    } )
+    })
 };
 
-function savetoLocal(arrayOfTasks) {
-    localStorage.setItem("tasks", JSON.stringify(arrayOfTasks));
+// function to add data from array to local Storage
+function savetoLocal(dataTsk) {
+    localStorage.setItem("tasks", JSON.stringify(dataTsk));
 };
 
+// function to get data from local Storage
 function getData() {
     let data = localStorage.getItem("tasks");
-    if( data ) {
+    if (data) {
         let tasks = JSON.parse(data);
         addElementsToPageFrom(tasks);
     }
 }
 
+// this function delete the task target from array Of Tasks. 
+// with the method of filter and save new array Task data to local Storage.
 function delItm(taskId) {
-    arrayOfTasks = arrayOfTasks.filter( (t) =>t.id != taskId );
-    savetoLocal(arrayOfTasks);
+    dataTsk = dataTsk.filter((t) => t.id != taskId);
+    savetoLocal(dataTsk);
+}
+
+
+function changcomp(taskId) {
+
+    for (let i = 0; i < dataTsk.length; i++) {
+        if (dataTsk[i].id == taskId) {
+            dataTsk[i].completed == false ? (dataTsk[i].completed = true) : (dataTsk[i].completed = false);
+        }
+    }
+    savetoLocal(dataTsk);
 }
