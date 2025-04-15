@@ -74,7 +74,6 @@ input {
     gap: 10px;
     padding: 20px 30px;
     border-radius: 10px;
-    cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
@@ -110,11 +109,11 @@ i {
 }
 
 
-@media (max-width: 400px) {
+@media (max-width: 700px) {
     .form {
         display: block;
         place-items: center;
-        padding: 20px;
+        padding: 10px 15px;
         overflow: hidden;
     }
 
@@ -129,8 +128,17 @@ i {
     }
 
     .container {
+        padding: 10px 15px;
+    }
+
+    .list {
         padding: 10px 20px;
     }
 
-
+    .tasks {
+        padding: 5px;
+    }
+    h3 {
+        width: 100%;
+    }
 }
